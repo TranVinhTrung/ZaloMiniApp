@@ -16,13 +16,13 @@ export const Banner: FC = () => {
         loop
         cssMode
       >
-        {[1, 2, 3, 4, 5]
+        {[6, 7, 8, 9, 10]
           .map((i) => getDummyImage(`banner-${i}.jpg`))
           .map((banner, i) => (
             <SwiperSlide key={i} className="px-4">
               <Box
                 className="w-full rounded-lg aspect-[2/1] bg-cover bg-center bg-skeleton"
-                style={{ backgroundImage: `url(${banner})` }}
+                style={{ backgroundImage: `url(${banner})`}}
               />
             </SwiperSlide>
           ))}

@@ -26,13 +26,13 @@ export const userState = selector({
 export const categoriesState = selector<Category[]>({
   key: "categories",
   get: () => [
-    { id: "coffee", name: "Nike", icon: nikeIcon },
-    { id: "matcha", name: "Adidas", icon: adidasIcon },
-    { id: "food", name: "Puma", icon: pumaIcon },
-    { id: "milktea", name: "Mizuno", icon: mizunoIcon },
-    { id: "drinks", name: "Asics", icon: asicsIcon },
-    { id: "bread", name: "Kamito", icon: kamitoIcon },
-    { id: "juice", name: "Zocker", icon: zockerIcon },
+    { id: "Nike", name: "Nike", icon: nikeIcon },
+    { id: "Adidas", name: "Adidas", icon: adidasIcon },
+    { id: "Puma", name: "Puma", icon: pumaIcon },
+    { id: "Mizuno", name: "Mizuno", icon: mizunoIcon },
+    { id: "Asics", name: "Asics", icon: asicsIcon },
+    { id: "Kamito", name: "Kamito", icon: kamitoIcon },
+    { id: "Zocker", name: "Zocker", icon: zockerIcon },
   ],
 });
 
@@ -41,192 +41,212 @@ const description = `There is a set of mock banners available <u>here</u> in thr
 export const productsState = selector<Product[]>({
   key: "products",
   get: async () => {
-    await wait(2000);
-    const variants: Variant[] = [
-      {
-        key: "size",
-        label: "Kích cỡ",
-        type: "single",
-        default: "m",
-        options: [
-          {
-            key: "s",
-            label: "Nhỏ",
-            priceChange: {
-              type: "percent",
-              percent: -0.2,
-            },
-          },
-          {
-            key: "m",
-            label: "Vừa",
-          },
-          {
-            key: "l",
-            label: "To",
-            priceChange: {
-              type: "percent",
-              percent: 0.2,
-            },
-          },
-        ],
-      },
-      {
-        key: "toping",
-        label: "Topping",
-        type: "multiple",
-        default: ["t1", "t4"],
-        options: [
-          {
-            key: "t1",
-            label: "Trân châu",
-            priceChange: {
-              type: "fixed",
-              amount: 5000,
-            },
-          },
-          {
-            key: "t2",
-            label: "Bánh flan",
-            priceChange: {
-              type: "fixed",
-              amount: 10000,
-            },
-          },
-          {
-            key: "t3",
-            label: "Trang trí",
-            priceChange: {
-              type: "percent",
-              percent: 0.15,
-            },
-          },
-          {
-            key: "t4",
-            label: "Không lấy đá",
-            priceChange: {
-              type: "fixed",
-              amount: -5000,
-            },
-          },
-        ],
-      },
-    ];
-    return [
-      {
-        id: 1,
-        name: "Caramel Latte",
-        price: 35000,
-        image: getDummyImage("product-square-1.jpg"),
-        description,
-        categoryId: ["coffee", "drinks"],
-        variants,
-      },
-      {
-        id: 2,
-        name: "Mocha Frappuccino",
-        price: 45000,
-        image: getDummyImage("product-square-2.jpg"),
-        description,
-        categoryId: ["coffee"],
-        variants,
-      },
-      {
-        id: 3,
-        name: "Grilled Pork Banh Mi",
-        price: 30000,
-        image: getDummyImage("product-square-3.jpg"),
-        description,
-        categoryId: ["food", "bread"],
-        variants,
-      },
-      {
-        id: 4,
-        name: "Pizza",
-        price: 28000,
-        image: getDummyImage("product-square-4.jpg"),
-        description,
-        categoryId: ["food"],
-        variants,
-      },
-      {
-        id: 5,
-        name: "Vanilla Latte",
-        price: 35000,
-        image: getDummyImage("product-square-5.jpg"),
-        description,
-        categoryId: ["coffee", "matcha"],
-        variants,
-      },
-      {
-        id: 6,
-        name: "Caramel Macchiato",
-        price: 38000,
-        image: getDummyImage("product-square-6.jpg"),
-        description,
-        categoryId: ["coffee", "milktea"],
-        variants,
-      },
-      {
-        id: 7,
-        name: "Espresso",
-        price: 32000,
-        image: getDummyImage("product-square-7.jpg"),
-        description,
-        categoryId: ["coffee"],
-        variants,
-      },
-      {
-        id: 8,
-        name: "Green Tea Latte",
-        price: 25000,
-        image: getDummyImage("product-square-8.jpg"),
-        description,
-        categoryId: ["matcha"],
-        variants,
-      },
-      {
-        id: 9,
-        name: "Bộ 3 Blue Corner Coffee siêu HOT",
-        image: getDummyImage("product-rect-1.jpg"),
-        price: 25000,
-        sale: {
-          type: "percent",
-          percent: 0.2,
-        },
-        description,
-        categoryId: ["coffee", "milktea", "drinks"],
-        variants,
-      },
-      {
-        id: 10,
-        name: "Combo Hi Tea Aroma",
-        image: getDummyImage("product-rect-2.jpg"),
-        price: 57000,
-        sale: {
-          type: "fixed",
-          amount: 7000,
-        },
-        description,
-        categoryId: ["coffee", "drinks"],
-        variants,
-      },
-      {
-        id: 11,
-        name: "Milk Tea Combo",
-        price: 55000,
-        image: getDummyImage("product-rect-3.jpg"),
-        description,
-        categoryId: ["milktea"],
-        variants,
-        sale: {
-          type: "percent",
-          percent: 0.5,
-        },
-      },
-    ];
+    const response = await fetch("http://localhost:47896/zalo/product");
+    const data = await response.json();
+    return data.products.map(
+      ({ id, title, description, price, category, images}) =>
+        <Product>{
+          id: id,
+          name: title,
+          description : description,
+          price: price,
+          categoryId: category,
+          image: images[0],
+        }
+    );
   },
 });
+
+
+// export const productsState = selector<Product[]>({
+//   key: "products",
+//   get: async () => {
+//     await wait(2000);
+//     const variants: Variant[] = [
+//       {
+//         key: "size",
+//         label: "Kích cỡ",
+//         type: "single",
+//         default: "m",
+//         options: [
+//           {
+//             key: "s",
+//             label: "Nhỏ",
+//             priceChange: {
+//               type: "percent",
+//               percent: -0.2,
+//             },
+//           },
+//           {
+//             key: "m",
+//             label: "Vừa",
+//           },
+//           {
+//             key: "l",
+//             label: "To",
+//             priceChange: {
+//               type: "percent",
+//               percent: 0.2,
+//             },
+//           },
+//         ],
+//       },
+//       {
+//         key: "toping",
+//         label: "Topping",
+//         type: "multiple",
+//         default: ["t1", "t4"],
+//         options: [
+//           {
+//             key: "t1",
+//             label: "Trân châu",
+//             priceChange: {
+//               type: "fixed",
+//               amount: 5000,
+//             },
+//           },
+//           {
+//             key: "t2",
+//             label: "Bánh flan",
+//             priceChange: {
+//               type: "fixed",
+//               amount: 10000,
+//             },
+//           },
+//           {
+//             key: "t3",
+//             label: "Trang trí",
+//             priceChange: {
+//               type: "percent",
+//               percent: 0.15,
+//             },
+//           },
+//           {
+//             key: "t4",
+//             label: "Không lấy đá",
+//             priceChange: {
+//               type: "fixed",
+//               amount: -5000,
+//             },
+//           },
+//         ],
+//       },
+//     ];
+//     return [
+//       {
+//         id: 1,
+//         name: "Caramel Latte",
+//         price: 35000,
+//         image: getDummyImage("banner-7.jpg"),
+//         description,
+//         categoryId: ["coffee", "drinks"],
+//         variants,
+//       },
+//       {
+//         id: 2,
+//         name: "Mocha Frappuccino",
+//         price: 45000,
+//         image: getDummyImage("product-square-2.jpg"),
+//         description,
+//         categoryId: ["coffee"],
+//         variants,
+//       },
+//       {
+//         id: 3,
+//         name: "Grilled Pork Banh Mi",
+//         price: 30000,
+//         image: getDummyImage("product-square-3.jpg"),
+//         description,
+//         categoryId: ["food", "bread"],
+//         variants,
+//       },
+//       {
+//         id: 4,
+//         name: "Pizza",
+//         price: 28000,
+//         image: getDummyImage("product-square-4.jpg"),
+//         description,
+//         categoryId: ["food"],
+//         variants,
+//       },
+//       {
+//         id: 5,
+//         name: "Vanilla Latte",
+//         price: 35000,
+//         image: getDummyImage("product-square-5.jpg"),
+//         description,
+//         categoryId: ["coffee", "matcha"],
+//         variants,
+//       },
+//       {
+//         id: 6,
+//         name: "Caramel Macchiato",
+//         price: 38000,
+//         image: getDummyImage("product-square-6.jpg"),
+//         description,
+//         categoryId: ["coffee", "milktea"],
+//         variants,
+//       },
+//       {
+//         id: 7,
+//         name: "Espresso",
+//         price: 32000,
+//         image: getDummyImage("product-square-7.jpg"),
+//         description,
+//         categoryId: ["coffee"],
+//         variants,
+//       },
+//       {
+//         id: 8,
+//         name: "Green Tea Latte",
+//         price: 25000,
+//         image: getDummyImage("product-square-8.jpg"),
+//         description,
+//         categoryId: ["matcha"],
+//         variants,
+//       },
+//       {
+//         id: 9,
+//         name: "Bộ 3 Blue Corner Coffee siêu HOT",
+//         image: getDummyImage("product-rect-1.jpg"),
+//         price: 25000,
+//         sale: {
+//           type: "percent",
+//           percent: 0.2,
+//         },
+//         description,
+//         categoryId: ["coffee", "milktea", "drinks"],
+//         variants,
+//       },
+//       {
+//         id: 10,
+//         name: "Combo Hi Tea Aroma",
+//         image: getDummyImage("product-rect-2.jpg"),
+//         price: 57000,
+//         sale: {
+//           type: "fixed",
+//           amount: 7000,
+//         },
+//         description,
+//         categoryId: ["coffee", "drinks"],
+//         variants,
+//       },
+//       {
+//         id: 11,
+//         name: "Milk Tea Combo",
+//         price: 55000,
+//         image: getDummyImage("product-rect-3.jpg"),
+//         description,
+//         categoryId: ["milktea"],
+//         variants,
+//         sale: {
+//           type: "percent",
+//           percent: 0.5,
+//         },
+//       },
+//     ];
+//   },
+// });
 
 export const recommendProductsState = selector<Product[]>({
   key: "recommendProducts",

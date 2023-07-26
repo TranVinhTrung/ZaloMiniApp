@@ -1,11 +1,11 @@
 export type CategoryId =
-  | "coffee"
-  | "matcha"
-  | "food"
-  | "milktea"
-  | "drinks"
-  | "bread"
-  | "juice";
+  | "Nike"
+  | "Adidas"
+  | "Puma"
+  | "Mizuno"
+  | "Asics"
+  | "Kamito"
+  | "Zocker";
 
 export interface Category {
   id: CategoryId;

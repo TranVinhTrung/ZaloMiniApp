@@ -47,7 +47,7 @@ export function calcFinalPrice(product: Product, options?: SelectedOptions) {
 }
 
 export function getDummyImage(filename: string) {
-  return `https://zalo-miniapp.github.io/zaui-coffee/dummy/${filename}`;
+  return `./docs/dummy/${filename}`;
 }
 
 export function isIdentical(

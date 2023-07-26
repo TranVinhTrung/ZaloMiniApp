@@ -6,6 +6,7 @@ import { CartPreview } from "./preview";
 import { TermsAndPolicies } from "./term-and-policies";
 import { Delivery } from "./delivery";
 import { useVirtualKeyboardVisible } from "hooks";
+import { DeliveryTest } from "./picker-test";
 
 const CartPage: FC = () => {
   const keyboardVisible = useVirtualKeyboardVisible();
@@ -15,6 +16,8 @@ const CartPage: FC = () => {
       <Header title="Giỏ hàng" showBackIcon={false} />
       <CartItems />
       <Delivery />
+      <Divider size={12} />
+      <DeliveryTest />
       <Divider size={12} />
       <TermsAndPolicies />
       <Divider size={32} className="flex-1" />
