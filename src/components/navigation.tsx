@@ -23,6 +23,10 @@ const tabs: Record<string, MenuItem> = {
     label: "Cá nhân",
     icon: <Icon icon="zi-user" />,
   },
+  "/test": {
+    label: "Test",
+    icon: <Icon icon="zi-user" />,
+  },
 };
 
 export type TabKeys = keyof typeof tabs;

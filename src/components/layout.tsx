@@ -6,6 +6,7 @@ import HomePage from "pages/index";
 import CategoryPage from "pages/category";
 import CartPage from "pages/cart";
 import NotificationPage from "pages/notification";
+import TestPage from "pages/test";
 import ProfilePage from "pages/profile";
 import SearchPage from "pages/search";
 import { getSystemInfo } from "zmp-sdk";
@@ -34,6 +35,7 @@ export const Layout: FC = () => {
           <Route path="/notification" element={<NotificationPage />}></Route>
           <Route path="/cart" element={<CartPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
+          <Route path="/test" element={<TestPage />}></Route>
         </Routes>
       </Box>
       <Navigation />
